@@ -18,7 +18,7 @@ Uma vez que o Docker Desktop esteja funcionando no seu computador, você deve:
 
    `docker-compose up -d`
 
-3. Após verificar que os containers foram ativados, abra o seu navegador no endereço
+3. Após verificar que os containers foram ativados, aguarde 30 segundos e abra o seu navegador no endereço
 
     [http://127.0.0.1:8123]( http://127.0.0.1:8123)
 

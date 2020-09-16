@@ -20,7 +20,6 @@ try {
 } catch (PDOException $e) {
     $ok = false;
 }
-
 ?>
 <!doctype html>
 <html lang="pt_BR">
