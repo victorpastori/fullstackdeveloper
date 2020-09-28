@@ -13,9 +13,11 @@ try {
 
     $statement = $db->prepare($sql);
 
+    $statement->execute();
+
     $now = $statement->fetchColumn();
 
-    $ok = ($now === FALSE);
+    $ok = ($now !== FALSE);
 
 } catch (PDOException $e) {
     $ok = false;
