@@ -37,7 +37,18 @@ Uma vez que o Docker Desktop esteja funcionando no seu computador, você deve:
 
 ## Ferramentas recomendadas
 
-Durante a prova, você precisará acessar o banco de dados MySQL para criar tabelas e fazer outras consultas. Sugerimos que use um programa como o [SequelPro](https://sequelpro.com/) (para Mac) ou [HeidiSQL](https://www.heidisql.com/) (para Windows) para isto.
+Durante a prova, você precisará acessar o banco de dados MySQL para criar tabelas e fazer outras consultas. Sugerimos que use um programa como o [SequelPro](https://sequelpro.com/) (para Mac) ou [HeidiSQL](https://www.heidisql.com/) (para Windows) para isto. Caso tenha problemas para acessar o banco relacionados à falta de uma biblioteca cliente MySQL no seu computador, rode uma instalação  do [MySQL 5.6 Community Edition](https://dev.mysql.com/downloads/mysql/) com a opção client-only. 
 
 Você também deve escolher um editor de código com que esteja habituado. Na Gaudium, nós usamos o [VSCode](https://code.visualstudio.com/) e o [PHPStorm](https://www.jetbrains.com/pt-br/phpstorm/).
 
+## Conhecimentos específicos
+
+Você deve estar familiarizado com:
+
+- **Bootstrap 4.5** para criar o layout de páginas HTML/CSS
+
+- **jquery 3.5** para manipular os componentes da página em Javascript e fazer requisições Ajax. 
+
+- Opcionalmente, você pode providenciar uma **chave de API GOOGLE** para acesso ao serviço **Directions**. Haverá uma questão opcional na prova que precisará acessar esta API programaticamente.
+
+  https://developers.google.com/maps/documentation/directions/overview?hl=pt
