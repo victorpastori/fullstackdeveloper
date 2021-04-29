@@ -9,15 +9,17 @@ $ok = true;
 try {
     $db = new PDO($dsn, $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
-    $sql = "select curdate() from dual";
+    $sql = "select * from cidades";
 
     $statement = $db->prepare($sql);
 
     $statement->execute();
 
+    $cidade = $statement->fetch();
+
     $now = $statement->fetchColumn();
 
-    $ok = ($now !== FALSE);
+    $ok = true;
 
 } catch (PDOException $e) {
     $ok = false;
@@ -45,7 +47,7 @@ try {
             <div class="jumbotron mx-auto">
                 <?php if ($ok) { ?>
                     <div class="alert alert-success mx-auto" role="alert">
-                        Ambiente instalado com sucesso!
+                        Rodando na cidade: <?= $cidade['nome'] ?>
                     </div>
                 <?php } else { ?>
                     <div class="alert alert-danger mx-auto" role="alert">
