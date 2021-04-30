@@ -1,26 +1,13 @@
 <?php
 
-$dsn = 'mysql:host=gd-fs-docker-mysql;port=3306;dbname=gdfs';
-$user = 'gdfs';
-$password = 'gdsecret';
+require_once 'entities/repositories/CidadeRepository.php';
+require_once 'entities/repositories/CategoriaRepository.php';
 
 $ok = true;
 
 try {
-    $db = new PDO($dsn, $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-
-    $sql = "select * from cidades";
-
-    $statement = $db->prepare($sql);
-
-    $statement->execute();
-
-    $cidade = $statement->fetch();
-
-    $now = $statement->fetchColumn();
-
-    $ok = true;
-
+    $cidades = (new CidadeRepository())->getAll();
+    $categorias = (new CategoriaRepository())->getAll();
 } catch (PDOException $e) {
     $ok = false;
 }
@@ -44,16 +31,41 @@ try {
             <h2 class="mx-auto">Prova Desenvolvedor Full Stack</h2>
         </div>
         <div class="row pt-5">
-            <div class="jumbotron mx-auto">
-                <?php if ($ok) { ?>
-                    <div class="alert alert-success mx-auto" role="alert">
-                        Rodando na cidade: <?= $cidade['nome'] ?>
+            <div class="col-sm-6">
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label for="select_cidade">Selecione a cidade</label>
+                        <select class="form-control" id="select_cidade" name="cidade_id">
+                            <?php foreach ($cidades as $cidade){ ?>
+                                <option value="<?= $cidade['id'] ?>"><?= $cidade['nome'] ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
-                <?php } else { ?>
-                    <div class="alert alert-danger mx-auto" role="alert">
-                        Não foi possível conectar ao banco de dados.
+
+                    <div class="form-group">
+                        <label for="select_categoria">Selecione a categoria</label>
+                        <select class="form-control" id="select_categoria" name="categoria_id">
+                            <?php foreach ($categorias as $categoria){ ?>
+                                <option value="<?= $categoria['id'] ?>"><?= $categoria['nome'] ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
-                <?php } ?>
+
+                    <div class="form-group">
+                        <label for="ipt_endereco_origem">Digite seu endereço de origem</label>
+                        <input class="form-control" type="text" id="ipt_endereco_origem" name="endereco_origem">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ipt_endereco_destino">Digite seu endereço de destino</label>
+                        <input class="form-control" type="text" id="ipt_endereco_destino" name="endereco_destino">
+                    </div>
+
+                    <button class="btn btn-primary btn-block" type="submit">Efetuar estimativa</button>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <p>Em Rio de Janeiro, carro executivo, de Rua da Assembléia, 10 para Rua Barata Ribeiro, 30, às 10:34: R$ 23,15.</p>
             </div>
         </div>
     </div> <!-- /container -->
