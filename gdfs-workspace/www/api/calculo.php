@@ -9,8 +9,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $json = file_get_contents('php://input');
         $data = json_decode($json, true);
     }
-    $cidade = (new CidadeRepository())->findWithCategoria($data['cidade_id']);
-    if(is_null($cidade)){
+    $cidade = (new CidadeRepository())->findWithCategoria($data['cidade_id'], $data['categoria_id']);
+    if(!is_null($cidade)){
         $distancia = rand(0, 100);
         $duracao = rand(0, 60);
         $date = new DateTime(null, new DateTimeZone('America/Sao_Paulo'));
@@ -37,6 +37,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             ),
         );
         echo json_encode($response);
+    }else{
+        echo 'Não possível relizar o calculo';
     }
 }else{
     echo 'Não possível relizar o calculo';

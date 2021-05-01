@@ -39,6 +39,7 @@ try {
                     <div class="form-group">
                         <label for="select_cidade">Selecione a cidade</label>
                         <select class="form-control" id="select_cidade" name="cidade_id" required>
+                            <option></option>
                             <?php foreach ($cidades as $cidade){ ?>
                                 <option value="<?= $cidade['id'] ?>"><?= $cidade['nome'] ?></option>
                             <?php } ?>
@@ -48,9 +49,9 @@ try {
                     <div class="form-group">
                         <label for="select_categoria">Selecione a categoria</label>
                         <select class="form-control" id="select_categoria" name="categoria_id" required>
-                            <?php foreach ($categorias as $categoria){ ?>
-                                <option value="<?= $categoria['id'] ?>"><?= $categoria['nome'] ?></option>
-                            <?php } ?>
+<!--                            --><?php //foreach ($categorias as $categoria){ ?>
+<!--                                <option value="--><?//= $categoria['id'] ?><!--">--><?//= $categoria['nome'] ?><!--</option>-->
+<!--                            --><?php //} ?>
                         </select>
                     </div>
 
