@@ -21,6 +21,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/custom.css">
     <title>Gaudium Software - Prova Desenvolvedor Full Stack</title>
 </head>
 <body>
@@ -32,9 +33,9 @@ try {
         <div class="row">
             <h2 class="mx-auto">Prova Desenvolvedor Full Stack</h2>
         </div>
-        <div class="row pt-5">
-            <div class="col-sm-6">
-                <form id="form_calculo_estimativa" action="/api/calculo.php" method="post">
+        <div class="row justify-content-between pt-5">
+            <div class="col-sm-4 section-form">
+                <form class="pt-3 pb-3" id="form_calculo_estimativa" action="/api/calculo.php" method="post">
                     <div class="form-group">
                         <label for="select_cidade">Selecione a cidade</label>
                         <select class="form-control" id="select_cidade" name="cidade_id" required>
@@ -66,10 +67,12 @@ try {
                     <button class="btn btn-primary btn-block" type="submit">Efetuar estimativa</button>
                 </form>
             </div>
-            <div class="col-sm-6" id="section_historico">
-                <?php foreach ($historico as $item){ ?>
-                    <p>Em <?= $item['cidade'] ?>, <?= $item['categoria'] ?>, de <?= $item['endereco_origem'] ?> para <?= $item['endereco_destino'] ?>, às <?= $item['horario'] ?>: R$ <?= number_format($item['valor']/100, 2, ',', '.') ?></p>
-                <?php } ?>
+            <div class="col-sm-6 section-historico" id="section_historico">
+                <div class="pt-2 pb-2">
+                    <?php foreach ($historico as $item){ ?>
+                        <p>Em <?= $item['cidade'] ?>, <?= $item['categoria'] ?>, de <?= $item['endereco_origem'] ?> para <?= $item['endereco_destino'] ?>, às <?= $item['horario'] ?>: R$ <?= number_format($item['valor']/100, 2, ',', '.') ?></p>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     </div> <!-- /container -->
