@@ -29,9 +29,11 @@ create table historico_calculos (
     endereco_origem varchar(1000) not null,
     endereco_destino varchar(1000) not null,
     duracao double not null,
+    distancia double not null,
     valor double not null,
     cidade_id int not null,
     categoria_id int not null,
+    created_at datetime not null,
     FOREIGN KEY (categoria_id) REFERENCES categorias(id),
     FOREIGN KEY (cidade_id) REFERENCES cidades(id),
     PRIMARY KEY (id)
