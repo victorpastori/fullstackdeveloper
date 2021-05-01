@@ -2,12 +2,14 @@
 
 require_once 'entities/repositories/CidadeRepository.php';
 require_once 'entities/repositories/CategoriaRepository.php';
+require_once 'entities/repositories/HistoricoCalculosRepository.php';
 
 $ok = true;
 
 try {
     $cidades = (new CidadeRepository())->getAll();
     $categorias = (new CategoriaRepository())->getAll();
+    $historico = (new HistoricoCalculosRepository())->getAll();
 } catch (PDOException $e) {
     $ok = false;
 }
@@ -32,10 +34,10 @@ try {
         </div>
         <div class="row pt-5">
             <div class="col-sm-6">
-                <form action="" method="post">
+                <form id="form_calculo_estimativa" action="/api/calculo.php" method="post">
                     <div class="form-group">
                         <label for="select_cidade">Selecione a cidade</label>
-                        <select class="form-control" id="select_cidade" name="cidade_id">
+                        <select class="form-control" id="select_cidade" name="cidade_id" required>
                             <?php foreach ($cidades as $cidade){ ?>
                                 <option value="<?= $cidade['id'] ?>"><?= $cidade['nome'] ?></option>
                             <?php } ?>
@@ -44,7 +46,7 @@ try {
 
                     <div class="form-group">
                         <label for="select_categoria">Selecione a categoria</label>
-                        <select class="form-control" id="select_categoria" name="categoria_id">
+                        <select class="form-control" id="select_categoria" name="categoria_id" required>
                             <?php foreach ($categorias as $categoria){ ?>
                                 <option value="<?= $categoria['id'] ?>"><?= $categoria['nome'] ?></option>
                             <?php } ?>
@@ -53,19 +55,21 @@ try {
 
                     <div class="form-group">
                         <label for="ipt_endereco_origem">Digite seu endereço de origem</label>
-                        <input class="form-control" type="text" id="ipt_endereco_origem" name="endereco_origem">
+                        <input class="form-control" type="text" id="ipt_endereco_origem" name="endereco_origem" required>
                     </div>
 
                     <div class="form-group">
                         <label for="ipt_endereco_destino">Digite seu endereço de destino</label>
-                        <input class="form-control" type="text" id="ipt_endereco_destino" name="endereco_destino">
+                        <input class="form-control" type="text" id="ipt_endereco_destino" name="endereco_destino" required>
                     </div>
 
                     <button class="btn btn-primary btn-block" type="submit">Efetuar estimativa</button>
                 </form>
             </div>
-            <div class="col-sm-6">
-                <p>Em Rio de Janeiro, carro executivo, de Rua da Assembléia, 10 para Rua Barata Ribeiro, 30, às 10:34: R$ 23,15.</p>
+            <div class="col-sm-6" id="section_historico">
+                <?php foreach ($historico as $item){ ?>
+                    <p>Em <?= $item['cidade'] ?>, <?= $item['categoria'] ?>, de <?= $item['endereco_origem'] ?> para <?= $item['endereco_destino'] ?>, às <?= $item['horario'] ?>: R$ <?= number_format($item['valor']/100, 2, ',', '.') ?></p>
+                <?php } ?>
             </div>
         </div>
     </div> <!-- /container -->
@@ -79,5 +83,6 @@ try {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+<script src="assets/custom.js"></script>
 </body>
 </html>

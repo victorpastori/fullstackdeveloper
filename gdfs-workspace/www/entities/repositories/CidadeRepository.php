@@ -23,7 +23,7 @@ class CidadeRepository extends BaseRepository
     }
 
     public function findWithCategoria($id){
-        $sql = 'select * from cidades as C ';
+        $sql = 'select C.nome as cidade, CC.*, CA.nome as categoria from cidades as C ';
         $sql_join = 'inner join cidade_has_categorias as CC on C.id = CC.cidade_id ';
         $sql_join_2 = 'inner join categorias as CA on CA.id = CC.categoria_id ';
         $sql_where = 'where C.id = ' . $id;
